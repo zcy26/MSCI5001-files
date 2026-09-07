@@ -1,0 +1,35 @@
+&control
+   prefix = 'Si'
+   pseudo_dir = '../pp'
+   calculation = 'scf'
+/
+&system
+   ecutwfc = 30
+   ibrav = 0
+   a = 5.431
+   nat = 2
+   ntyp = 1
+   occupations = 'smearing'
+   degauss = 1e-08
+/
+&electrons
+   electron_maxstep = 300
+   conv_thr = 1e-10
+   mixing_mode = 'plain'
+   mixing_beta = 0.7
+   mixing_ndim = 8
+   diagonalization = 'david'
+   diago_david_ndim = 4
+   diago_full_acc = .true.
+/
+CELL_PARAMETERS alat
+    0.000000000   0.500000000   0.500000000
+    0.500000000   0.000000000   0.500000000
+    0.500000000   0.500000000   0.000000000
+ATOMIC_SPECIES 
+    Si 28.086 Si.upf
+ATOMIC_POSITIONS crystal
+    Si  -0.125000000  -0.125000000  -0.125000000
+    Si   0.125000000   0.125000000   0.125000000
+K_POINTS automatic
+   12 12 12 0 0 0
