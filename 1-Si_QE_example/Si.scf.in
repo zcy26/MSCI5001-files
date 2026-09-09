@@ -1,27 +1,42 @@
+! Things start with & and end with / are "namelists". They must be in the exact order of control, system, electrons, ... (see doc for details)
 &control
+   ! name for the system
    prefix = 'Si'
-   pseudo_dir = '../pp'
+   ! directory to pseudopotential (e.g., .UPF files)
+   pseudo_dir = './'
+   ! what calculations to do (scf=self consistent field, i.e., a normal DFT.), see doc for other params.
    calculation = 'scf'
 /
 &system
+   ! plane wave fuctoff for wavefunction in Ry
    ecutwfc = 30
+   ! Bravais-lattice type, 0: specify the three basis vector in CELL_PARAMETERS
    ibrav = 0
+   ! lattice parameters in ang
    a = 5.431
+   ! number of atoms
    nat = 2
+   ! type of atoms
    ntyp = 1
-   occupations = 'smearing'
-   degauss = 1e-08
+   ! What occupations to use. insulator: fixed, metal: smearing, etc. If you need fermi energy, use smearing and specify degauss (spreading width).
+   occupations = 'fixed'
+   ! which xc functional approximation is used? It is read from pseudopotential by default.
+   ! The given pseudopotential uses Perdew–Burke–Ernzerhof (PBE) functional (a GGA functional), you can find it at line 84 of Si.upf.
 /
 &electrons
+   ! maximum number of self-consistent steps
    electron_maxstep = 300
+   ! convergence threshold for energy
    conv_thr = 1e-10
+   ! mixing schemes and parameters
    mixing_mode = 'plain'
-   mixing_beta = 0.7
-   mixing_ndim = 8
+   mixing_beta = 0.6
+   ! diagonalization algorithm and parameters
    diagonalization = 'david'
    diago_david_ndim = 4
    diago_full_acc = .true.
 /
+! The following are "cards", they can be in arbitrary order
 CELL_PARAMETERS alat
     0.000000000   0.500000000   0.500000000
     0.500000000   0.000000000   0.500000000
@@ -32,4 +47,4 @@ ATOMIC_POSITIONS crystal
     Si  -0.125000000  -0.125000000  -0.125000000
     Si   0.125000000   0.125000000   0.125000000
 K_POINTS automatic
-   12 12 12 0 0 0
+   6 6 6 0 0 0
